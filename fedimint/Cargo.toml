@@ -52,7 +52,7 @@ serde_json = "1.0.61"
 sha3 = "0.10.4"
 sled = "0.34.6"
 tbs = { path = "../crypto/tbs" }
-thiserror = "1.0.23"
+thiserror = "1.0.34"
 tokio = { version = "1.21.0", features = ["full"] }
 tokio-rustls = "0.23.4"
 tokio-util = { version = "0.6.0", features = [ "codec" ] }
