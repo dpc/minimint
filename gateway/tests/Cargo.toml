@@ -12,4 +12,4 @@ path = "tests/tests.rs"
 
 [dev-dependencies]
 ln-gateway = { path = "../ln-gateway" }
-tokio = { version = "1.21.2", features = ["full"] }
+tokio = { version = "1.23.0", features = ["full"] }
