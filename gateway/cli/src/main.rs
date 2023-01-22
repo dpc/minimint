@@ -7,8 +7,8 @@ use fedimint_server::modules::wallet::txoproof::TxOutProof;
 use ln_gateway::{
     config::GatewayConfig,
     rpc::{
-        rpc_client::RpcClient, BalancePayload, ConnectFedPayload, DepositAddressPayload,
-        DepositPayload, WithdrawPayload,
+        rpc_client::RpcClient, BackupPayload, BalancePayload, ConnectFedPayload,
+        DepositAddressPayload, DepositPayload, RestorePayload, WithdrawPayload,
     },
 };
 use mint_client::utils::from_hex;
@@ -199,7 +199,7 @@ async fn main() {
         }
         Commands::Restore { federation_id } => {
             let response = client
-                .backup(
+                .restore(
                     source_password(cli.rpcpassword),
                     RestorePayload { federation_id },
                 )
