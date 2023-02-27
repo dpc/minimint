@@ -33,6 +33,13 @@ fi
 export git_ls_files
 git_ls_files="$(git ls-files)"
 
+function check_forbiden_depenencies() {
+  if grep -E "(fedimint-mint|fedimint-wallet|fedimint-ln)" fedimint-server/Cargo.toml >&2 ; then
+    >&2 echo "fedimint-server/Cargo.toml must not depend on modules"
+    return 1
+  fi
+}
+export -f check_forbiden_depenencies
 
 function check_nix() {
   # shellcheck disable=SC2046
@@ -110,4 +117,11 @@ function check_eof() {
 export -f check_eof
 
 
-parallel ::: check_nix check_cargo_fmt check_dbg check_semgrep check_shellcheck check_eof 
+parallel ::: \
+  check_nix \
+  check_cargo_fmt \
+  check_dbg \
+  check_semgrep \
+  check_shellcheck \
+  check_eof \
+  check_forbiden_depenencies
