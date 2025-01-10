@@ -37,7 +37,7 @@ fedimint-logging = { path = "../fedimint-logging" }
 fedimint-server = { path = "../fedimint-server" }
 rand = "0.8"
 serde = { version = "1.0.149", features = [ "derive" ] }
-thiserror = "1.0.39"
+thiserror = "1.0.55"
 tokio = { version = "1.26.0", features = ["full", "tracing"] }
 tracing ="0.1.37"
 tracing-subscriber = { version = "0.3.16", features = [ "env-filter" ] }
