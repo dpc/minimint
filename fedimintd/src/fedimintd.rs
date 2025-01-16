@@ -237,7 +237,6 @@ impl Fedimintd {
         );
 
         handle_version_hash_command(code_version_hash);
-        check_release_notes_ack()?;
 
         let fedimint_version = env!("CARGO_PKG_VERSION");
 
@@ -246,6 +245,7 @@ impl Fedimintd {
             .set(fedimint_core::time::duration_since_epoch().as_secs() as i64);
 
         let opts: ServerOpts = ServerOpts::parse();
+        check_release_notes_ack()?;
 
         TracingSetup::default()
             .tokio_console_bind(opts.tokio_console_bind)

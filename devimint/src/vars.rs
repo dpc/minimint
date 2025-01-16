@@ -112,7 +112,10 @@ declare_vars! {
     Global = (test_dir: &Path, fed_size: usize, offline_nodes: usize) =>
     {
         FM_USE_UNKNOWN_MODULE: String = std::env::var(FM_USE_UNKNOWN_MODULE_ENV).unwrap_or_else(|_| "1".into()); env: "FM_USE_UNKNOWN_MODULE";
-        FM_ENABLE_MODULE_LNV2: String = if crate::util::FedimintdCmd::version_or_default().await < *VERSION_0_5_0 { "0".to_owned() } else { "1".into() }; env: FM_ENABLE_MODULE_LNV2_ENV;
+        FM_ENABLE_MODULE_LNV2: String = if
+        dbg!(dbg!(crate::util::FedimintdCmd::version_or_default().await) < *VERSION_0_5_0 ||
+        dbg!(crate::util::Gatewayd::version_or_default().await) < *VERSION_0_5_0)
+        { "0".to_owned() } else { "1".into() }; env: FM_ENABLE_MODULE_LNV2_ENV;
 
 
         FM_FORCE_API_SECRETS: ApiSecrets = std::env::var(FM_FORCE_API_SECRETS_ENV).ok().and_then(|s| {

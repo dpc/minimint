@@ -1358,12 +1358,14 @@ async fn set_config_gen_params(
     // TODO(support:v0.3): v0.4 introduced lnv2 modules, so we need to skip
     // attaching the module for old fedimintd versions
     let fedimintd_version = crate::util::FedimintdCmd::version_or_default().await;
+    let gatewayd_version = crate::util::Gatewayd::version_or_default().await;
     self::config::attach_default_module_init_params(
         &BitcoinRpcConfig::get_defaults_from_env_vars()?,
         &mut server_gen_params,
         Network::Regtest,
         10,
         &fedimintd_version,
+        &gatewayd_version,
     );
     // Since we are not actually calling `fedimintd` binary, parse and handle
     // `FM_EXTRA_META_DATA` like it would do.
@@ -1393,12 +1395,14 @@ async fn cli_set_config_gen_params(
     // TODO(support:v0.3): v0.4 introduced lnv2 modules, so we need to skip
     // attaching the module for old fedimintd versions
     let fedimintd_version = crate::util::FedimintdCmd::version_or_default().await;
+    let gatewayd_version = crate::util::Gatewayd::version_or_default().await;
     self::config::attach_default_module_init_params(
         &BitcoinRpcConfig::get_defaults_from_env_vars()?,
         &mut server_gen_params,
         Network::Regtest,
         10,
         &fedimintd_version,
+        &gatewayd_version,
     );
     // Since we are not actually calling `fedimintd` binary, parse and handle
     // `FM_EXTRA_META_DATA` like it would do.

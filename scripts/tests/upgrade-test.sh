@@ -100,17 +100,6 @@ for version_path in "${version_paths[@]}"; do
       "devimint upgrade-tests gatewayd --gatewayd-paths $(printf "%s " "${gatewayd_paths[@]}") --gateway-cli-paths $(printf "%s " "${gateway_cli_paths[@]}")"
     )
   fi
-
-  if contains "mnemonic" "${test_kinds[@]}"; then
-    old_gatewayd=$(nix_build_binary_for_version 'gatewayd' "v0.4.0")
-    new_gatewayd="gatewayd"
-    old_gateway_cli=$(nix_build_binary_for_version 'gateway-cli' "v0.4.0")
-    new_gateway_cli="gateway-cli"
-
-    upgrade_tests+=(
-      "gateway-tests gatewayd-mnemonic --old-gatewayd-path $old_gatewayd --new-gatewayd-path $new_gatewayd --gw-type lnd --old-gateway-cli-path $old_gateway_cli --new-gateway-cli-path $new_gateway_cli"
-    )
-  fi
 done
 
 

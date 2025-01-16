@@ -222,7 +222,9 @@ impl DevJitFed {
                 // TODO(support:v0.4.0): Only run LDK gateway when the federation supports LNv2
                 let fedimintd_version = crate::util::FedimintdCmd::version_or_default().await;
                 let gatewayd_version = crate::util::Gatewayd::version_or_default().await;
-                if gatewayd_version >= *VERSION_0_5_0 && fedimintd_version >= *VERSION_0_5_0 {
+                if dbg!(gatewayd_version) >= *VERSION_0_5_0
+                    && dbg!(fedimintd_version) >= *VERSION_0_5_0
+                {
                     debug!(target: LOG_DEVIMINT, "Starting ldk gateway...");
                     let start_time = fedimint_core::time::now();
                     let ldk_gw = Gatewayd::new(&process_mgr, LightningNode::Ldk).await?;

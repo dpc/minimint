@@ -738,8 +738,7 @@ impl ConfigGenState {
             let module = self.settings.registry.get(kind).expect("Module exists");
             module.validate_params(&combined).map_err(|e| {
                 ApiError::bad_request(format!(
-                    "Module {} params invalid: {}",
-                    id,
+                    "Module {id} kind: {kind} params invalid: {}",
                     itertools::join(e.chain(), ": ")
                 ))
             })?;

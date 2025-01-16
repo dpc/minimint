@@ -31,6 +31,7 @@ pub fn attach_default_module_init_params(
     network: Network,
     finality_delay: u32,
     fedimintd_version: &semver::Version,
+    gatewayd_version: &semver::Version,
 ) {
     module_init_params.attach_config_gen_params(
         LightningInit::kind(),
@@ -83,7 +84,7 @@ pub fn attach_default_module_init_params(
 
     // TODO(support:v0.3): v0.5 introduced lnv2 modules, so we need to skip
     // attaching the module for old fedimintd versions
-    if fedimintd_version >= &VERSION_0_5_0 {
+    if fedimintd_version >= &VERSION_0_5_0 && gatewayd_version >= &VERSION_0_5_0 {
         module_init_params.attach_config_gen_params(
             fedimint_lnv2_server::LightningInit::kind(),
             fedimint_lnv2_common::config::LightningGenParams {

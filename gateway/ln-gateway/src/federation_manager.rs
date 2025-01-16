@@ -150,12 +150,12 @@ impl FederationManager {
             .clients
             .values()
             .map(|client| async {
-                client
-                    .value()
-                    .get_first_module::<GatewayClientModule>()
-                    .expect("Must have client module")
-                    .remove_from_federation(gateway_keypair)
-                    .await;
+                if let Ok(lnv1) = client.value().get_first_module::<GatewayClientModule>() {
+                    lnv1.remove_from_federation(gateway_keypair).await;
+                } else if let Ok(lnv2) = client.value().get_first_module::<GatewayClientModuleV2>()
+                {
+                    // lnv2.remove_from_federation(gateway_keypair).await;
+                }
             })
             .collect::<Vec<_>>();
 
